@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#7e22ce">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>2 Months · Purple Love</title>
+  <style>
+    /* ============================================================
+       PURPLE MOBILE THEME — with placeholder feedback
+       ============================================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --purple-900: #3b0764;
+      --purple-800: #4c1d95;
+      --purple-700: #6b21a8;
+      --purple-600: #7e22ce;
+      --purple-500: #a855f7;
+      --purple-400: #c084fc;
+      --purple-300: #d8b4fe;
+      --purple-200: #e9d5ff;
+      --purple-100: #f3e8ff;
+      --purple-50:  #faf5ff;
+    }
+
+    html, body {
+      height: 100%;
+      overscroll-behavior-y: none;
+    }
+
+    body {
+      background: linear-gradient(160deg, #f3e8ff 0%, #e9d5ff 40%, #d8b4fe 100%);
+      background-attachment: fixed;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins', system-ui, sans-serif;
+      color: var(--purple-900);
+      line-height: 1.55;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 1rem 0.9rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .bg-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-hearts span {
+      position: absolute;
+      color: #c084fc55;
+      font-size: 1.6rem;
+      user-select: none;
+      animation: float 18s infinite linear;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0.2; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0.55; }
+    }
+
+    /* ============================================================
+       PASSWORD LOCK SCREEN
+       ============================================================ */
+    .lock-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: linear-gradient(160deg, #f3e8ff 0%, #e9d5ff 40%, #d8b4fe 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1.5rem 1.2rem;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+    }
+
+    .lock-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.05);
+      pointer-events: none;
+    }
+
+    .lock-card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 2rem;
+      box-shadow:
+        0 30px 50px -20px #6b21a8,
+        0 0 0 2px #c084fc,
+        0 0 0 5px #ffffff70 inset;
+      padding: 1.8rem 1.3rem 1.8rem;
+      margin: auto 0;
+      text-align: center;
+      animation: lockCardIn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+    }
+
+    @keyframes lockCardIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .lock-icon {
+      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+      display: block;
+      animation: lockPulse 2.4s infinite ease-in-out;
+      filter: drop-shadow(0 6px 12px #a855f766);
+    }
+
+    @keyframes lockPulse {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.1); }
+    }
+
+    .lock-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--purple-800);
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+      text-shadow: 2px 2px 0 var(--purple-200);
+      line-height: 1.25;
+    }
+
+    .lock-subtitle {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--purple-600);
+      margin-bottom: 1.3rem;
+      background: var(--purple-100);
+      padding: 0.3rem 0.9rem;
+      border-radius: 40px;
+      display: inline-block;
+      border: 1.5px solid var(--purple-300);
+    }
+
+    .question-block {
+      background: white;
+      border-radius: 1.3rem;
+      padding: 0.9rem 0.9rem 1rem;
+      margin-bottom: 0.85rem;
+      text-align: left;
+      border-left: 6px solid var(--purple-500);
+      box-shadow: 0 8px 16px -10px #a855f7, 0 0 0 1.5px var(--purple-300);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .question-block:focus-within {
+      box-shadow: 0 10px 20px -10px #7e22ce, 0 0 0 2px var(--purple-500);
+      border-left-color: var(--purple-700);
+    }
+
+    .question-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--purple-200);
+      color: var(--purple-800);
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .question-label {
+      display: block;
+      font-size: 0.87rem;
+      font-weight: 700;
+      color: var(--purple-800);
+      line-height: 1.4;
+      margin-bottom: 0.6rem;
+    }
+
+    .q-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font-size: 0.98rem;
+      font-family: inherit;
+      font-weight: 600;
+      color: var(--purple-900);
+      background: var(--purple-50);
+      border: 2px solid var(--purple-300);
+      border-radius: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      -webkit-appearance: none;
+      appearance: none;
+      letter-spacing: 0.3px;
+    }
+
+    .q-input:focus {
+      border-color: var(--purple-600);
+      background: white;
+      box-shadow: 0 0 0 4px #c084fc55;
+    }
+
+    .q-input::placeholder {
+      color: #a78bca;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .q-input.correct {
+      border-color: #16a34a;
+      background: #f0fdf4;
+      box-shadow: 0 0 0 4px #86efac80;
+    }
+
+    .q-input.correct::placeholder {
+      color: #16a34a;
+      font-weight: 700;
+    }
+
+    .q-input.wrong {
+      border-color: #dc2626;
+      background: #fef2f2;
+      box-shadow: 0 0 0 4px #fca5a580;
+      animation: shake 0.45s ease;
+    }
+
+    .q-input.wrong::placeholder {
+      color: #dc2626;
+      font-weight: 700;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%      { transform: translateX(-7px); }
+      40%      { transform: translateX(7px); }
+      60%      { transform: translateX(-5px); }
+      80%      { transform: translateX(5px); }
+    }
+
+    .lock-hearts {
+      margin-top: 1rem;
+      font-size: 1rem;
+      letter-spacing: 0.4rem;
+      color: var(--purple-400);
+      opacity: 0.8;
+    }
+
+    /* ============================================================
+       MAIN CARD
+       ============================================================ */
+    .gift-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 2rem;
+      box-shadow:
+        0 24px 40px -18px #6b21a8,
+        0 0 0 1.5px #c084fc,
+        0 0 0 4px #ffffff70 inset;
+      padding: 1.6rem 1.2rem 1.8rem;
+      animation: cardIn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 1.3rem;
+    }
+
+    .header h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--purple-800);
+      text-shadow: 2px 2px 0 var(--purple-200), 0 0 14px #c084fc;
+      line-height: 1.1;
+    }
+
+    .header .sub {
+      margin-top: 0.45rem;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--purple-700);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--purple-100);
+      padding: 0.35rem 1rem;
+      border-radius: 40px;
+      border: 1.5px solid var(--purple-400);
+      box-shadow: 0 3px 10px #a855f733;
+    }
+
+    .heart-icon {
+      font-size: 1.1rem;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.2); }
+    }
+
+    .photo-frame {
+      background: var(--purple-50);
+      border-radius: 1.6rem;
+      padding: 0.6rem 0.6rem 0.8rem;
+      box-shadow: 0 14px 24px -12px var(--purple-600), 0 0 0 2px var(--purple-400);
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 1.2rem;
+      border: 2.5px solid var(--purple-500);
+      background: var(--purple-200);
+      display: block;
+    }
+
+    .notes-panel h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--purple-800);
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2.5px solid var(--purple-400);
+    }
+
+    .notes-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .notes-list li {
+      list-style: none;
+    }
+
+    .note-card {
+      width: 100%;
+      background: white;
+      border: none;
+      border-left: 7px solid var(--purple-500);
+      border-radius: 1.2rem;
+      padding: 0.95rem 2.4rem 0.95rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--purple-900);
+      text-align: left;
+      box-shadow: 0 6px 14px -6px #a855f7, 0 0 0 1.5px var(--purple-300);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease;
+      -webkit-appearance: none;
+      appearance: none;
+      line-height: 1.35;
+    }
+
+    .note-card:active {
+      transform: scale(0.97);
+      background: var(--purple-100);
+      box-shadow: 0 3px 8px -4px #7e22ce, 0 0 0 1.5px var(--purple-500);
+    }
+
+    .note-card::after {
+      content: "›";
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--purple-400);
+      transition: transform 0.2s ease, color 0.2s ease;
+      pointer-events: none;
+    }
+
+    .note-card:active::after {
+      transform: translateY(-50%) translateX(4px);
+      color: var(--purple-600);
+    }
+
+    .note-bullet {
+      font-size: 1.35rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .note-text {
+      flex: 1;
+      pointer-events: none;
+    }
+
+    .footer {
+      margin-top: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: var(--purple-800);
+      background: var(--purple-200);
+      padding: 0.7rem 1.1rem;
+      border-radius: 60px;
+      border: 2px solid var(--purple-400);
+      box-shadow: 0 8px 16px -8px var(--purple-700);
+      font-size: 0.92rem;
+      flex-wrap: wrap;
+    }
+
+    .footer .big-heart {
+      font-size: 1.35rem;
+      animation: beat 1.6s infinite;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.25); }
+    }
+
+    .footer .days {
+      background: var(--purple-500);
+      color: white;
+      padding: 0.2rem 0.85rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 10px var(--purple-400);
+    }
+
+    .detail-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: linear-gradient(160deg, #f3e8ff 0%, #e9d5ff 40%, #d8b4fe 100%);
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1.1rem 1.6rem;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(100%);
+      transition: opacity 0.32s ease, transform 0.36s cubic-bezier(0.2, 0.9, 0.3, 1.05), visibility 0.36s;
+    }
+
+    .detail-overlay.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .detail-topbar {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1.2rem;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding-bottom: 0.3rem;
+    }
+
+    .back-btn {
+      background: white;
+      border: 2px solid var(--purple-400);
+      color: var(--purple-800);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 14px -6px var(--purple-600);
+      transition: transform 0.15s ease, background 0.2s ease;
+      flex-shrink: 0;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .back-btn:active {
+      transform: scale(0.9);
+      background: var(--purple-100);
+    }
+
+    .detail-title-small {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--purple-700);
+      background: var(--purple-100);
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      border: 1.5px solid var(--purple-300);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 70%;
+    }
+
+    .detail-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      max-width: 520px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .detail-emoji {
+      font-size: 3.2rem;
+      text-align: center;
+      line-height: 1;
+      filter: drop-shadow(0 8px 10px #a855f766);
+      animation: popIn 0.5s cubic-bezier(0.2, 1.2, 0.4, 1.1);
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.7); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .detail-headline {
+      text-align: center;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--purple-800);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      text-shadow: 2px 2px 0 var(--purple-200);
+      padding: 0 0.3rem;
+    }
+
+    .detail-photo-frame {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 1.6rem;
+      padding: 0.55rem 0.55rem 0.85rem;
+      box-shadow:
+        0 18px 30px -18px var(--purple-700),
+        0 0 0 2px var(--purple-300),
+        0 0 0 5px #ffffff60 inset;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: photoIn 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1) 0.05s both;
+    }
+
+    @keyframes photoIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .detail-photo-frame img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 1.2rem;
+      border: 2.5px solid var(--purple-500);
+      background: var(--purple-200);
+      display: block;
+    }
+
+    .detail-photo-caption {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--purple-700);
+      background: var(--purple-200);
+      padding: 0.28rem 0.9rem;
+      border-radius: 40px;
+      border: 1px dashed var(--purple-500);
+      text-align: center;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .detail-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 1.6rem;
+      padding: 1.4rem 1.3rem 1.6rem;
+      box-shadow: 0 18px 30px -18px var(--purple-700), 0 0 0 2px var(--purple-300), 0 0 0 5px #ffffff60 inset;
+      border-left: 7px solid var(--purple-500);
+    }
+
+    .detail-card p {
+      font-size: 1.05rem;
+      color: var(--purple-900);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      white-space: pre-line;
+    }
+
+    .detail-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-signature {
+      text-align: right;
+      margin-top: 0.6rem;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--purple-700);
+      font-size: 1.05rem;
+    }
+
+    .detail-footer {
+      margin-top: auto;
+      padding-top: 1.2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--purple-600);
+    }
+
+    .purple-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      color: var(--purple-400);
+      font-size: 1rem;
+      margin: 0.2rem 0 0.6rem;
+    }
+
+    .purple-divider::before,
+    .purple-divider::after {
+      content: "";
+      height: 2px;
+      width: 40px;
+      background: linear-gradient(90deg, transparent, var(--purple-400), transparent);
+      border-radius: 2px;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 380px) {
+      body { padding: 0.7rem 0.6rem 1.5rem; }
+      .gift-card { padding: 1.2rem 0.9rem 1.5rem; border-radius: 1.6rem; }
+      .header h1 { font-size: 1.8rem; }
+      .header .sub { font-size: 0.85rem; }
+      .photo-frame { padding: 0.45rem 0.45rem 0.65rem; }
+      .notes-panel h2 { font-size: 1.15rem; }
+      .note-card { font-size: 0.92rem; padding: 0.85rem 2.2rem 0.85rem 0.95rem; }
+      .note-bullet { font-size: 1.2rem; }
+      .footer { font-size: 0.82rem; padding: 0.6rem 0.9rem; }
+      .detail-headline { font-size: 1.35rem; }
+      .detail-card { padding: 1.1rem 1rem 1.3rem; }
+      .detail-card p { font-size: 0.97rem; line-height: 1.7; }
+      .detail-photo-caption { font-size: 0.7rem; }
+      .lock-card { padding: 1.4rem 1rem 1.5rem; }
+      .lock-title { font-size: 1.1rem; }
+      .question-label { font-size: 0.8rem; }
+      .q-input { font-size: 0.92rem; padding: 0.75rem 0.9rem; }
+    }
+
+    @media (min-width: 600px) {
+      .gift-card { padding: 2rem 1.8rem 2.2rem; }
+      .header h1 { font-size: 2.5rem; }
+    }
+
+    @supports (padding: max(0px)) {
+      body {
+        padding-top: max(1rem, env(safe-area-inset-top));
+        padding-bottom: max(2rem, env(safe-area-inset-bottom));
+      }
+      .detail-overlay {
+        padding-top: max(1rem, env(safe-area-inset-top));
+        padding-bottom: max(1.6rem, env(safe-area-inset-bottom));
+      }
+      .lock-screen {
+        padding-top: max(1.5rem, env(safe-area-inset-top));
+        padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+      }
+    }
+
+    ::selection { background: var(--purple-500); color: white; }
+  </style>
+</head>
+<body>
+  <!-- ============ PASSWORD LOCK SCREEN ============ -->
+  <div class="lock-screen" id="lockScreen">
+    <div class="lock-card" id="lockCard">
+      <span class="lock-icon">🔒</span>
+      <h1 class="lock-title">teyakewochun betekekel melshiyachew yene fkr</h1>
+      <div class="lock-subtitle">💜 ኪያ👄💋 💜</div>
+
+      <!-- QUESTION 1 -->
+      <div class="question-block">
+        <span class="question-number">1</span>
+        <label class="question-label" for="answer1">
+          mn setyegn new des milegn mn blesh seterign sayhon mn mil kal setnegrign new enen des milegn
+        </label>
+        <input
+          type="text"
+          id="answer1"
+          class="q-input"
+          data-q-index="0"
+          placeholder="መልስ 1..."
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+        >
+      </div>
+
+      <!-- QUESTION 2 -->
+      <div class="question-block">
+        <span class="question-number">2</span>
+        <label class="question-label" for="answer2">
+          ማን ብለሽ ስጠሪኝ ነው ደስ ሚለኝ እኔ?
+        </label>
+        <input
+          type="text"
+          id="answer2"
+          class="q-input"
+          data-q-index="1"
+          placeholder="መልስ 2..."
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+        >
+      </div>
+
+      <!-- QUESTION 3 -->
+      <div class="question-block">
+        <span class="question-number">3</span>
+        <label class="question-label" for="answer3">
+          የኔን ስልክ ቁጥር
+        </label>
+        <input
+          type="tel"
+          id="answer3"
+          class="q-input"
+          data-q-index="2"
+          placeholder="መልስ 3..."
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+        >
+      </div>
+
+      <button class="lock-btn" id="lockBtn" type="button" style="
+        width:100%;
+        margin-top:0.6rem;
+        padding:1rem 1.2rem;
+        font-size:1.1rem;
+        font-family:inherit;
+        font-weight:800;
+        color:white;
+        background:linear-gradient(135deg,#a855f7,#6b21a8);
+        border:none;
+        border-radius:1.2rem;
+        cursor:pointer;
+        box-shadow:0 10px 20px -8px #6b21a8,0 0 0 2px #ffffff40 inset;
+        letter-spacing:0.3px;
+        -webkit-appearance:none;
+        appearance:none;
+      ">open 🔓</button>
+
+      <div class="lock-hearts">💜 💜 💜</div>
+    </div>
+  </div>
+
+  <!-- floating background hearts -->
+  <div class="bg-hearts" aria-hidden="true">
+    <span style="left: 6%;  animation-duration: 19s;">💜</span>
+    <span style="left: 22%; animation-duration: 13s; font-size: 1.4rem;">💜</span>
+    <span style="left: 50%; animation-duration: 23s;">💜</span>
+    <span style="left: 78%; animation-duration: 16s; font-size: 1.7rem;">💜</span>
+    <span style="left: 91%; animation-duration: 21s;">💜</span>
+    <span style="left: 36%; animation-duration: 26s; font-size: 1.2rem;">💜</span>
+  </div>
+
+  <!-- ========================= MAIN CARD ========================= -->
+  <main class="gift-card" id="mainContent">
+    <div class="header">
+      <h1>✨ 2 Months ✨</h1>
+      <div class="sub">
+        <span class="heart-icon">💜</span>
+        my love🤌
+        <span class="heart-icon">💜</span>
+      </div>
+    </div>
+
+    <div class="photo-frame">
+      <img src="de6.jpg" alt="Our beautiful moment" loading="lazy">
+    </div>
+
+    <div class="notes-panel">
+      <h2><span>📝</span> little notes</h2>
+      <ul class="notes-list" id="notesList">
+
+        <li>
+          <button class="note-card" type="button"
+                  data-emoji="💜"
+                  data-title="ካንቺ ጋር ስሆን ያለኝን ደስታ የትም አላገኘውም my love"
+                  data-photo="de1.jpg"
+                  data-photo-caption="የኔ ፍቅር 💖"
+                  data-full="ማለቴ እንዲ ለቀልድ ምናምን ብዬ ሳይሆን የምርም ካንቺ ጋር ስሆን ያለኝን ደስታ እንዲ ነው ብዬ መናገር አልችልም 
+                  የኔ ፍቅር ታቂያለሽአ እንዴት ሰዕትዋ አጭር እንደምትሆን በሆነ አስማት ሰዓት ቀጥ ማረግ ብችል ለአመታት ምንም ስለቅሽ እቅፍሽ ውስጥ መሆን ህልሜ ነው 
+በቃ የደስታዬ ምንጭ የፈገግታዬ መፍላቂያ ነሽ ውስጤን በሀሴት ትሞያታለሽ💜">
+            <span class="note-bullet">💜</span>
+            <span class="note-text">ካንቺ ጋር ስሆን ያለኝን ደስታ የትም አላገኘውም my love</span>
+          </button>
+        </li>
+
+        <li>
+          <button class="note-card" type="button"
+                  data-emoji="✨"
+                  data-title="የኔ ህልም አንቺ ነሽ✨"
+                  data-photo="de.jpg"
+                  data-photo-caption="ስወድሽ ❤️‍🩹❤️‍🩹"
+                  data-full="የኔ ህልም አንቺን አግብቶ ልጆች ወልደን ደስተኛ ኑሮ አንድንኖር ነው ያንን ለማሰካት ደሞ የሆነ ነገር መጣር እንዳለብኝ አቃለው አሁን Campus ሄጄ በሆነ ኣጋጣሚ ካልተመቻቸልኝ ግን ማሬ ቅር እንዳይልሽ እየፈራሁ ነው ካሁኑ 
+                  መራራቁ ቀርቶ በአንድ አልጋ እምንነቃበት ቀን እሩቅ አይደለምና ትንሽ ታግሰን በደንብ እናተርፋለን 
+አንቺም በህልሜ አጠገብ ያለሽ ሚስቴ እንደሆነሽ አቃለሁ ለዛም ደግሞ አመሰግንሻለሁ የኔ የፀሎቴ መልስ 💞💜">
+            <span class="note-bullet">✨</span>
+            <span class="note-text">የኔ ህልም አንቺ ነሽ✨</span>
+          </button>
+        </li>
+
+        <li>
+          <button class="note-card" type="button"
+                  data-emoji="♾️"
+                  data-title="የኔ ጣፋጭ"
+                  data-photo="de2.jpg"
+                  data-photo-caption="እንዴት ደስ እንደምትይ😋"
+                  data-full="
+                  አንቺ ብቻ እንዳሸነፍሽኝ ታውቂያለሽ ግን
+
+                   እስከ አንቺ ደረስ Kiss ማንም ሴት ብትሆን መሳም ከባድ ነው ብዬ አላስብም ነበር ብከለከል እንኳን በሁለት ሳምንት መሳም እንደምችል ነበር እማስበው አንቺ ግን አሸነፍሽኝ ይኅው ሁለት ወር ሞላን አንድ ሳልቀምሰው srawberry የሆነ ከንፈርሽን
+
+                   ሚገርመው ደሞ እኮ አሳምነሽኛል ስላገባሽ እንደማላገኘው ለካ ለ Kiss ጋብቻ ይጠበቃል እንክል ድረስ ደሞ እነዚ ኬክ የሆኑ ከንፈሮች እየተፈታተኑኝ 
+
+                   even ጌታ ሆይ ስሜቴን መቆጣጠር እንድችል እርዳኝ ብዬ  ፀልዬ መጥቼ አቃለሁ አላስችል ብሎኝ ወደ አንገትሽ መውረዴ አስቀረም እንጂ
+
+                   የሰውነትሽ ሁኔታ እጄን ፤ ከንፈርሽ ከንፈሬን መሳብን ተክነውበታል እኔ እየተቆጣጠርኩት እንዳለው ነው ማስበው ግን ተሳስቼ ምቾትሽን የነሳሁሽ ጊዜ ካለ ይቅርታ እናቴ
+
+                   ግን የምር ተሳክቶልሻል እኔን ብቻ ሳይሆን ስሜቴንም ነው ያሸነፈሽው ♾️💜">
+            <span class="note-bullet">♾️</span>
+            <span class="note-text">my sexy girl😋😘</span>
+          </button>
+        </li>
+
+        <li>
+          <button class="note-card" type="button"
+                  data-emoji="🌹"
+                  data-title="My sweet girl"
+                  data-photo="de5.jpg"
+                  data-photo-caption="የከንፈርሽ ቅርፅ ራሱ እኮ ልብ ቅርፅ ነው😘"
+                  data-full="I don't know mn endasnekashegn salawerash yadereku
+                   ken eyekochegn new madrew mnamn moden tekotatriwalesh eko
+                    besereat demo migermew keategebe honesh aydelem 😭
+                     gn yaw nigst neshena enkuwan mooden akalatochen rasu yemekoyater mebtu alesh 
+Lanchi madergaten eyandanduan neger kelebe selemaregew barekut 
+neger kelebe new Des milegn yanchin reaction say any ways
+ yene fkr betam mekorabesh ena mewedesh wede fit 
+ yelejoche enat laregesh yemefelegesh miste nesh 🌹💜">
+            <span class="note-bullet">🌹</span>
+            <span class="note-text">konjoyewa miste</span>
+          </button>
+        </li>
+
+        <li>
+          <button class="note-card" type="button"
+                  data-emoji="🦋"
+                  data-title="yene abeba "
+                  data-photo="de3.jpg"
+                  data-photo-caption="i love you 💖"
+                  data-full="Wede fit seleminoren hyewet saseb ,
+                   kanchi ga seleneberun yefkr dekikawoch saseb,
+                   tegenagneten demo kelayesh lay kemifesew yefekr meaza setatelekelekign ,
+                    demo ende bomb bemiyasdeneget
+                    asasamesh sam setaregign ,
+                     enem miyasasa gunnch sam sareg yeneberegn desta saseb ,
+                      beyekenu kanchi gar  eyaweraw endehonena demo eyawerawesh endemenor saseb ,
+                     becha kanchi gar selalugn eyanadandu negeroch saseb
+                     misemagnen desta lenegeresh alchelem yehone yerase alem west egebalew 🦋🥰
+
+
+                     Demoko beye secondu new menafekign mn larg eshi 😭 
+                     ene beka mabede new bezi aynet enji alchelem nafkoteshen💜
+
+Yene enate 
+yene nigist 
+yene fkr yene nafkot
+ yene hywet 
+ yene desta
+  yene abeba 
+  yene yemenor mekniyat 
+  yene alama 
+  yene mist 
+  yene Hulu negere ewedeshalew 
+  lanchi sel enorleshalew asfelagi kehonem lanchi sel emoteleshalew 
+  akebreshalew 
+  etenekekeleshalew 
+  afekreshalew 
+  ema ጌታን አፈቅርሻለሁ
+😫❣️💗
+rasen mekotater eskemalchelw belay AFEKRESHALEW
+
+                     ">
+            <span class="note-bullet">🦋</span>
+            <span class="note-text">ኪያዬ💖💞💜🤍💛🧡💞💖💓💝</span>
+          </button>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="footer">
+      <span class="big-heart">💜</span>
+      <span>two months of us</span>
+      <span class="days">2 MONTHS</span>
+      <span>💜</span>
+    </div>
+  </main>
+
+  <!-- ==================== FULL-SCREEN DETAIL PAGE ==================== -->
+  <div class="detail-overlay" id="detailOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="detail-topbar">
+      <button class="back-btn" id="backBtn" aria-label="Go back" type="button">←</button>
+      <span class="detail-title-small" id="detailTopLabel">note</span>
+    </div>
+
+    <div class="detail-content">
+      <div class="detail-emoji" id="detailEmoji">💜</div>
+      <h2 class="detail-headline" id="detailHeadline">You make my heart smile</h2>
+
+      <div class="detail-photo-frame">
+        <img id="detailPhoto" src="de1.jpg" alt="Our moment together" loading="lazy">
+        <div class="detail-photo-caption" id="detailPhotoCaption">
+          📸 our first month together
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <p id="detailBody"></p>
+        <div class="detail-signature">— always yours 💜</div>
+      </div>
+      <div class="purple-divider">💜 💜 💜</div>
+      <div class="detail-footer">2 months · and forever to go</div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      /* ============================================================
+         PASSWORD LOCK LOGIC — 3 SEPARATE INPUTS
+         ============================================================
+         ALL 3 questions must be answered correctly to unlock.
+         Answers are VISIBLE (type="text" and type="tel").
+         ============================================================ */
+      const questions = [
+        {
+          answers: ["afekrekalew", "yene fkr", "afekrekalew yene fkr","AFEKEREKALEW","afekerekalew","አፈቅርሀለው","አፈቅርካለው"],
+          wrongMsg:   "😭💔 aydelem yene fkr",
+          correctMsg: "enem afekereshalew lk nesh yene fkr😘🥰"
+        },
+        {
+          answers: ["aba", "አባ", "abate", "አባት", "wed", "ውድ", "aba yene fkr"],
+          wrongMsg:   "😭💔 aydelem",
+          correctMsg: "✅ endi setyegn new lebe kelet milew"
+        },
+        {
+          answers: ["0985185103", "0985 185 103", "+251985185103", "251985185103"],
+          wrongMsg:   "ጭራሽ ስልኬን አታቂወም🙆‍♂️😭😭",
+          correctMsg: "✔️😊"
+        }
+      ];
+
+      const lockScreen = document.getElementById('lockScreen');
+      const lockBtn    = document.getElementById('lockBtn');
+      const inputs     = [
+        document.getElementById('answer1'),
+        document.getElementById('answer2'),
+        document.getElementById('answer3')
+      ];
+
+      const originalPlaceholders = inputs.map(inp => inp.getAttribute('placeholder'));
+
+      let errorTimers = [null, null, null];
+      const isCorrect = [false, false, false];
+
+      /* ---------- set temporary placeholder feedback ---------- */
+      function setTempPlaceholder(input, index, message, correct) {
+        if (errorTimers[index]) clearTimeout(errorTimers[index]);
+
+        input.setAttribute('placeholder', message);
+        input.classList.add(correct ? 'correct' : 'wrong');
+
+        errorTimers[index] = setTimeout(() => {
+          input.setAttribute('placeholder', originalPlaceholders[index]);
+          if (correct && isCorrect[index]) {
+            input.classList.remove('wrong');
+            input.classList.add('correct');
+          } else {
+            input.classList.remove('correct', 'wrong');
+          }
+          errorTimers[index] = null;
+        }, correct ? 2200 : 2500);
+      }
+
+      /* ---------- normalize phone number ---------- */
+      function normalizePhone(str) {
+        return str.replace(/[\s\-+()]/g, '');
+      }
+
+      /* ---------- check ALL inputs; unlock ONLY if ALL 3 are correct ---------- */
+      function tryUnlock() {
+        inputs.forEach((input, i) => {
+          const raw = (input.value || '').trim();
+          if (!raw) return;
+
+          const entered = raw.toLowerCase();
+          const accepted = questions[i].answers.map(a => a.toLowerCase().trim());
+
+          let matched = accepted.includes(entered);
+          if (!matched && i === 2) {
+            const enteredPhone = normalizePhone(entered);
+            matched = accepted.some(a => normalizePhone(a) === enteredPhone);
+          }
+
+          if (matched) {
+            isCorrect[i] = true;
+            setTempPlaceholder(input, i, questions[i].correctMsg, true);
+            input.value = '';
+            input.classList.remove('wrong');
+            input.classList.add('correct');
+          } else {
+            isCorrect[i] = false;
+            setTempPlaceholder(input, i, questions[i].wrongMsg, false);
+            input.value = '';
+          }
+        });
+
+        if (isCorrect.every(Boolean)) {
+          setTimeout(() => {
+            lockScreen.classList.add('hidden');
+            inputs.forEach(inp => inp.blur());
+          }, 1000);
+        }
+      }
+
+      /* ---------- button + Enter key ---------- */
+      lockBtn.addEventListener('click', tryUnlock);
+
+      inputs.forEach((input, i) => {
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            tryUnlock();
+          }
+        });
+        input.addEventListener('input', () => {
+          if (isCorrect[i]) {
+            isCorrect[i] = false;
+            input.classList.remove('correct');
+          }
+          input.classList.remove('wrong');
+        });
+      });
+
+      setTimeout(() => {
+        const firstEmpty = inputs.find(i => !i.value.trim()) || inputs[0];
+        firstEmpty.focus();
+      }, 400);
+
+      /* ============================================================
+         MAIN APP LOGIC (notes + detail page)
+         ============================================================ */
+      const overlay        = document.getElementById('detailOverlay');
+      const backBtn        = document.getElementById('backBtn');
+      const detailEmoji    = document.getElementById('detailEmoji');
+      const detailHead     = document.getElementById('detailHeadline');
+      const detailBody     = document.getElementById('detailBody');
+      const detailLabel    = document.getElementById('detailTopLabel');
+      const detailPhoto    = document.getElementById('detailPhoto');
+      const detailPhotoCap = document.getElementById('detailPhotoCaption');
+      const noteButtons    = document.querySelectorAll('.note-card');
+
+      let lastScrollY = 0;
+
+      function openDetail(button) {
+        const emoji        = button.dataset.emoji        || '💜';
+        const title        = button.dataset.title        || 'note';
+        const full         = button.dataset.full         || 'Add your own message here.';
+        const photo        = button.dataset.photo        || 'de1.jpg';
+        const photoCaption = button.dataset.photoCaption || '📸 our moment';
+
+        detailEmoji.textContent = emoji;
+        detailHead.textContent  = title;
+        detailLabel.textContent = '💜 ' + title;
+        detailBody.innerHTML    = formatText(full);
+
+        detailPhoto.src = photo;
+        detailPhoto.alt = photoCaption;
+        detailPhotoCap.textContent = photoCaption;
+
+        lastScrollY = window.scrollY;
+        document.body.classList.add('modal-open');
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        overlay.scrollTop = 0;
+
+        setTimeout(() => backBtn.focus(), 320);
+      }
+
+      function closeDetail() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        window.scrollTo(0, lastScrollY);
+      }
+
+      function formatText(text) {
+        const paragraphs = text.split(/\n\s*\n/);
+        return paragraphs.map(p => {
+          const trimmed = p.trim();
+          if (!trimmed) return '';
+          return '<p>' + escapeHtml(trimmed) + '</p>';
+        }).join('');
+      }
+
+      function escapeHtml(str) {
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      noteButtons.forEach(button => {
+        button.addEventListener('click', () => openDetail(button));
+      });
+
+      backBtn.addEventListener('click', closeDetail);
+
+      window.addEventListener('popstate', (e) => {
+        if (overlay.classList.contains('open')) {
+          e.preventDefault();
+          closeDetail();
+          history.pushState(null, '', location.href);
+        }
+      });
+      history.pushState(null, '', location.href);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) {
+          closeDetail();
+        }
+      });
+
+      let touchStartX = 0;
+      let touchStartY = 0;
+      overlay.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      overlay.addEventListener('touchend', (e) => {
+        if (!overlay.classList.contains('open')) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (dx > 70 && Math.abs(dy) < 60) {
+          closeDetail();
+        }
+      }, { passive: true });
+
+      console.log('💜 All 3 answers required to unlock!');
+      console.log('✔️😊 Q3 correct → just emojis');
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
